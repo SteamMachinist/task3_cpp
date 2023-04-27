@@ -1,7 +1,8 @@
 #include <iostream>
+#include "BinaryTree.h"
 
 int main()
 {
-    std::cout << "Hello, World!" << std::endl;
+    BinaryTree<int> bt = *new BinaryTree<int>();
     return 0;
 }
