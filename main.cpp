@@ -8,6 +8,6 @@ int main()
     {
         std::cout << num << std::endl;
     }
-    std::cin.ignore();
+    //std::cin.ignore();
     return 0;
 }

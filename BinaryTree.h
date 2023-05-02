@@ -1,6 +1,9 @@
 #ifndef TASK3_CPP_BINARYTREE_H
 #define TASK3_CPP_BINARYTREE_H
 
+#include "Node.h"
+#include "Iterator.h"
+
 template<typename T>
 class BinaryTree
 {
@@ -9,71 +12,10 @@ public:
     {
         Preorder, Inorder, Postorder, Levelorder
     };
-
-public:
-    class Node
-    {
-    public:
-        Node(T data, Node *left);
-        Node(T data, Node *left, Node *right);
-        ~Node();
-        T data;
-        Node *left;
-        Node *right;
-        Node(T data);
-    };
-
-    Node *root;
+    friend class Iterator<T>;
+    Node<T> *root;
     int nodes;
     TraversalType traversalType = TraversalType::Preorder;
-
-public:
-    class Iterator
-    {
-    public:
-        using iterator_category = std::forward_iterator_tag;
-        using difference_type = std::ptrdiff_t;
-        using type_ptr = T *;
-        using type_ref = T &;
-        using pointer = Node *;
-        using reference = Node &;
-
-        pointer ptr;
-        Iterator(pointer ptr): ptr(ptr) {}
-
-        Iterator operator++()
-        {
-            ptr = ptr->left;
-            return *this;
-        }
-
-        Iterator operator++(int)
-        {
-            Iterator stash = *this;
-            ptr = ptr->left;
-            return stash;
-        }
-
-        type_ref operator*() const
-        {
-            return ptr->data;
-        }
-
-        type_ptr operator->()
-        {
-            return &(ptr->data);
-        }
-
-        bool operator==(const Iterator &other)
-        {
-            return ptr == other.ptr;
-        }
-
-        bool operator!=(const Iterator &other)
-        {
-            return ptr != other.ptr;
-        }
-    };
 
 public:
     BinaryTree();
@@ -88,8 +30,8 @@ public:
 
     TraversalType getTraversalType();
     void setTraversalType(TraversalType traversalType);
-    BinaryTree<T>::Iterator begin();
-    BinaryTree<T>::Iterator end();
+    Iterator<T> begin();
+    Iterator<T> end();
 
 
 };
@@ -107,45 +49,15 @@ void BinaryTree<T>::setTraversalType(BinaryTree::TraversalType traversalType)
 }
 
 template<typename T>
-BinaryTree<T>::Node::Node(T data)
+Iterator<T> BinaryTree<T>::begin()
 {
-    this->data = data;
-    this->left = nullptr;
-    this->right = nullptr;
+    return Iterator<T>(this->root);
 }
 
 template<typename T>
-BinaryTree<T>::Node::Node(T data, BinaryTree::Node *left)
+Iterator<T> BinaryTree<T>::end()
 {
-    this->data = data;
-    this->left = left;
-    this->right = nullptr;
-}
-
-template<typename T>
-BinaryTree<T>::Node::Node(T data, BinaryTree::Node *left, BinaryTree::Node *right)
-{
-    this->data = data;
-    this->left = left;
-    this->right = right;
-}
-
-template<typename T>
-BinaryTree<T>::Node::~Node()
-{
-    delete this->data;
-}
-
-template<typename T>
-BinaryTree<T>::Iterator BinaryTree<T>::begin()
-{
-    return Iterator(this->root);
-}
-
-template<typename T>
-BinaryTree<T>::Iterator BinaryTree<T>::end()
-{
-    return Iterator(nullptr);
+    return Iterator<T>(nullptr);
 }
 
 template<typename T>
