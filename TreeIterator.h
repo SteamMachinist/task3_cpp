@@ -1,5 +1,5 @@
-#ifndef TASK3_CPP_ITERATOR_H
-#define TASK3_CPP_ITERATOR_H
+#ifndef TASK3_CPP_TREEITERATOR_H
+#define TASK3_CPP_TREEITERATOR_H
 
 #include <list>
 
@@ -9,9 +9,9 @@ template<typename T>
 class Node;
 
 template<typename T>
-class Iterator
+class TreeIterator
 {
-public:
+private:
     using iterator_category = std::forward_iterator_tag;
     using difference_type = std::ptrdiff_t;
     using type_node = Node<T>;
@@ -23,8 +23,8 @@ public:
     node_pointer current;
     list<Node<T> *> traversal = *new list<Node<T> *>();
 
-
-    Iterator(node_pointer pointer, BinaryTree<T>::TraversalType type) : current(pointer)
+public:
+    TreeIterator(node_pointer pointer, BinaryTree<T>::TraversalType type) : current(pointer)
     {
         switch (type)
         {
@@ -44,6 +44,7 @@ public:
                 traverseLevelorder(pointer);
                 break;
         }
+        current = traversal.front();
     }
 
     void traversePreorder(Node<T> *node)
@@ -117,7 +118,7 @@ public:
         }
     }
 
-    Iterator<T> &operator++()
+    TreeIterator<T> &operator++()
     {
         if (traversal.empty())
         {
@@ -131,9 +132,9 @@ public:
         return *this;
     }
 
-    Iterator<T> operator++(int)
+    TreeIterator<T> operator++(int)
     {
-        Iterator<T> stash = *this;
+        TreeIterator<T> stash = *this;
         if (traversal.empty())
         {
             current = nullptr;
@@ -156,19 +157,19 @@ public:
         return &(current->data);
     }
 
-    bool operator==(const Iterator &other)
+    bool operator==(const TreeIterator &other)
     {
         return current == other.current;
     }
 
-    bool operator!=(const Iterator &other)
+    bool operator!=(const TreeIterator &other)
     {
         return current != other.current;
     }
 
-    ~Iterator()
+    ~TreeIterator()
     {}
 };
 
 
-#endif //TASK3_CPP_ITERATOR_H
+#endif //TASK3_CPP_TREEITERATOR_H

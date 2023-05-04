@@ -85,10 +85,10 @@
 		<Unit filename="C:/Users/rando/CLionProjects/task3_cpp/BinaryTree.h">
 			<Option target="task3_cpp"/>
 		</Unit>
-		<Unit filename="C:/Users/rando/CLionProjects/task3_cpp/Iterator.h">
+		<Unit filename="C:/Users/rando/CLionProjects/task3_cpp/Node.h">
 			<Option target="task3_cpp"/>
 		</Unit>
-		<Unit filename="C:/Users/rando/CLionProjects/task3_cpp/Node.h">
+		<Unit filename="C:/Users/rando/CLionProjects/task3_cpp/TreeIterator.h">
 			<Option target="task3_cpp"/>
 		</Unit>
 		<Unit filename="C:/Users/rando/CLionProjects/task3_cpp/main.cpp">

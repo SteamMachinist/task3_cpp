@@ -5,7 +5,7 @@ template<typename T>
 class BinaryTree;
 
 template<typename T>
-class Iterator;
+class TreeIterator;
 
 template<typename T>
 class Node {
@@ -19,13 +19,34 @@ public:
     Node(T data, Node *left, Node *right) : data(data), left(left), right(right) {}
     ~Node();
 
+    T getData();
+    Node *getLeft();
+    Node *getRight();
+
     friend class BinaryTree<T>;
-    friend class Iterator<T>;
+    friend class TreeIterator<T>;
 };
 
 template<typename T>
+T Node<T>::getData() {
+    return data;
+}
+
+template<typename T>
+Node<T> *Node<T>::getLeft() {
+    return left;
+}
+
+template<typename T>
+Node<T> *Node<T>::getRight() {
+    return right;
+}
+
+template<typename T>
 Node<T>::~Node() {
-    delete this->data;
+    //delete data;
+    delete left;
+    delete right;
 }
 
 #endif //TASK3_CPP_NODE_H
