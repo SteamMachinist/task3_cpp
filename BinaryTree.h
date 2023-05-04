@@ -32,8 +32,6 @@ public:
     void setTraversalType(TraversalType traversalType);
     Iterator<T> begin();
     Iterator<T> end();
-
-
 };
 
 template<typename T>
