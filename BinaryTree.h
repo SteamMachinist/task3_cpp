@@ -12,6 +12,10 @@ public:
     {
         Preorder, Inorder, Postorder, Levelorder
     };
+    enum class Place
+    {
+        Left, Right
+    };
     friend class Iterator<T>;
     Node<T> *root;
     int nodes;
@@ -49,20 +53,25 @@ void BinaryTree<T>::setTraversalType(BinaryTree::TraversalType traversalType)
 template<typename T>
 Iterator<T> BinaryTree<T>::begin()
 {
-    return Iterator<T>(this->root);
+    return Iterator<T>(this->root, this->traversalType);
 }
 
 template<typename T>
 Iterator<T> BinaryTree<T>::end()
 {
-    return Iterator<T>(nullptr);
+    return Iterator<T>(nullptr, this->traversalType);
 }
 
 template<typename T>
 BinaryTree<T>::BinaryTree()
 {
-    root = new Node(10);
+    root = new Node(0);
     root->left = new Node(20);
+    root->right = new Node(25);
+    root->left->left = new Node(30);
+    root->left->right = new Node(35);
+    root->right->left = new Node(40);
+    root->right->right = new Node(45);
 }
 
 template<typename T>
